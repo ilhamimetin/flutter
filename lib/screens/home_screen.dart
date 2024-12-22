@@ -13,7 +13,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: Center(
         child: Column(
-          children: [],
+          children: [
+            Text("Deneme")
+          ],
         ),
       ),
     );
