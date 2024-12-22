@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:listeler/models/elemanlar_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
