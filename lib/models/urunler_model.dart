@@ -38,3 +38,6 @@ class Kategori {
     return Kategori(json["id"], json["isim"]);
   }
 }
+
+
+// Sonradan Eklendi
