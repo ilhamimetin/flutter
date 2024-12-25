@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Text("Deneme"),
             Text(_urunlerModel != null
                 ? _urunlerModel!.urunler[10].isim
-                : "Yükleniyor")
+                : "Yükleniyor! Sonradan Eklendi")
           ],
         ),
       ),
