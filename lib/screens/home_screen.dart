@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:listeler/models/urunler_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -10,12 +11,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  UrunlerModel? _urunlerModel;
+
   void _loadData() async {
     // Burada veri çekme işlemleri yapılacak
     final dataString = await rootBundle.loadString("assets/files/data.json");
     final dataJson = jsonDecode(dataString);
-    print(dataJson["categories"]);
-    // debugPrint(dataJson.runtimeType.toString());
+    setState(() {
+      _urunlerModel = UrunlerModel.fromJson(dataJson);
+    });
   }
 
   @override
@@ -30,7 +34,12 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [Text("Deneme")],
+          children: [
+            Text("Deneme"),
+            Text(_urunlerModel != null
+                ? _urunlerModel!.urunler[10].isim
+                : "Yükleniyor")
+          ],
         ),
       ),
     );
