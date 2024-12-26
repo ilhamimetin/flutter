@@ -1,6 +1,6 @@
 class UrunlerModel {
   final List<Urun> urunler;
-  final List<dynamic> kategoriler;
+  final List<Kategori> kategoriler;
 
   UrunlerModel(this.urunler, this.kategoriler);
 
@@ -10,8 +10,10 @@ class UrunlerModel {
 
     final List<Urun> listUrunler =
         jsonUrunler.map((e) => Urun.fromJson(e)).toList();
+    final List<Kategori> listKategoriler =
+        jsonKategoriler.map((e) => Kategori.fromJson(e)).toList();
 
-    return UrunlerModel(listUrunler, jsonKategoriler);
+    return UrunlerModel(listUrunler, listKategoriler);
   }
 }
 
@@ -38,4 +40,3 @@ class Kategori {
     return Kategori(json["id"], json["isim"]);
   }
 }
-
