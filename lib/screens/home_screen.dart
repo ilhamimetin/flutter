@@ -16,34 +16,20 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: setValue,
-          child: Text("OK"),
+      body: Center(
+        child: RichText(
+          text: TextSpan(
+              text: "Flutter Ders ",
+              style: TextStyle(
+                fontSize: 24,
+                color: Colors.deepOrange,
+              ),
+              children: [
+                TextSpan(text: "#26 ", style: TextStyle(color: Colors.blue)),
+                TextSpan(text: "Rich Text Kullanımı"),
+              ]),
         ),
-        body: Column(
-          children: [
-            Opacity(
-              opacity: _value ? 1 : 0.75,
-              child: Container(
-                height: 200,
-                color: Colors.redAccent,
-              ),
-            ),
-            Visibility(
-              visible: _value,
-              child: Expanded(
-                flex: 3,
-                child: Container(
-                  height: 100,
-                  color: Colors.blueGrey.shade200,
-                ),
-              ),
-            ),
-            Container(
-              height: 100,
-              color: Colors.lightBlue,
-            )
-          ],
-        ));
+      ),
+    );
   }
 }
