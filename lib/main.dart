@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:listeler/screens/home_screen.dart';
+import 'package:listeler/screens/login_screen.dart';
 
-void main(List<String> args) {
-  runApp(BenimUygulamam());
+void main() {
+  runApp(MyApp());
 }
 
-class BenimUygulamam extends StatelessWidget {
-  const BenimUygulamam({super.key});
+class MyApp extends StatelessWidget {
+   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Listeler',
-      home: HomeScreen(),
+      debugShowCheckedModeBanner: false,
+      home: LoginScreen(),
     );
   }
 }
