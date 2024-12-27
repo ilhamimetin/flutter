@@ -26,6 +26,21 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   
   Container _ornekWidget() {
-    
+    return Container(
+      width: 100,
+      height: 30,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: Colors.greenAccent,
+      ),
+      child: const Text(
+        'Item',
+        style: TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+    );
   }
 }
