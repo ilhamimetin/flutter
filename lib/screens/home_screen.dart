@@ -7,32 +7,29 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool _value = false;
+  void setValue() {
+    _value = !_value;
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      children: [
-        Flexible(
-          flex: 2,
-          // Kendi boyutunu olduğunca küçültmeye çalışır içindeki değere bakmaksızın.
-          child: Container(
-            height: 200,
-            color: Colors.redAccent,
-          ),
+      body: Center(
+        child: RichText(
+          text: TextSpan(
+              text: "Flutter Ders ",
+              style: TextStyle(
+                fontSize: 24,
+                color: Colors.deepOrange,
+              ),
+              children: [
+                TextSpan(text: "#26 ", style: TextStyle(color: Colors.blue)),
+                TextSpan(text: "Rich Text Kullanımı"),
+              ]),
         ),
-        Expanded(
-          flex: 3,
-          // Expanded içindeki column'un yükseklik değeriine bakmaksızın ekrana kaplayamaya çalışır.
-          child: Container(
-            height: 100,
-            color: Colors.blueGrey.shade200,
-          ),
-        ),
-        Container(
-          height: 100,
-          color: Colors.lightBlue,
-        )
-      ],
-    ));
+      ),
+    );
   }
 }
