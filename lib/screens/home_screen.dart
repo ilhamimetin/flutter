@@ -20,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
               // Burada Row kullanımında taşma hatası verir. Aynı şey column için de geçerlidir. Bu hatayı aşmak için Wrap Widget'i kullanılır. Spacing ve runSpacing ile widget'lar arasında boşluk bıraklabilir.
               spacing: 10,
               runSpacing: 10,
+              direction: Axis.vertical, // yukarıdan aşağıya hizalar
               children: [
                 _ornekWidget(),
                 _ornekWidget(),
