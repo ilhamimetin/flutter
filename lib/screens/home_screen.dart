@@ -14,17 +14,30 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Container(
           height: 200,
           color: Colors.grey,
-          child: Padding(padding: EdgeInsets.all(20),
-          child: Wrap(
-            children: [
+          child: Padding(
+            padding: EdgeInsets.all(20),
+            child: /*  Row */ Wrap(
+              // Burada Row kullanımında taşma hatası verir. Aynı şey column için de geçerlidir. Bu hatayı aşmak için Wrap Widget'i kullanılır. Spacing ve runSpacing ile widget'lar arasında boşluk bıraklabilir.
+              spacing: 10,
+              runSpacing: 10,
+              children: [
                 _ornekWidget(),
-            ],
-          ),),
+                _ornekWidget(),
+                _ornekWidget(),
+                _ornekWidget(),
+                _ornekWidget(),
+                _ornekWidget(),
+                _ornekWidget(),
+                _ornekWidget(),
+                _ornekWidget(),
+              ],
+            ),
+          ),
         ),
       ),
     );
   }
-  
+
   Container _ornekWidget() {
     return Container(
       width: 100,
