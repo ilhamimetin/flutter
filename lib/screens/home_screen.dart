@@ -7,32 +7,43 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool _value = false;
+  void setValue() {
+    _value = !_value;
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: setValue,
+          child: Text("OK"),
+        ),
         body: Column(
-      children: [
-        Flexible(
-          flex: 2,
-          // Kendi boyutunu olduğunca küçültmeye çalışır içindeki değere bakmaksızın.
-          child: Container(
-            height: 200,
-            color: Colors.redAccent,
-          ),
-        ),
-        Expanded(
-          flex: 3,
-          // Expanded içindeki column'un yükseklik değeriine bakmaksızın ekrana kaplayamaya çalışır.
-          child: Container(
-            height: 100,
-            color: Colors.blueGrey.shade200,
-          ),
-        ),
-        Container(
-          height: 100,
-          color: Colors.lightBlue,
-        )
-      ],
-    ));
+          children: [
+            Opacity(
+              opacity: _value ? 1 : 0.75,
+              child: Container(
+                height: 200,
+                color: Colors.redAccent,
+              ),
+            ),
+            Visibility(
+              visible: _value,
+              child: Expanded(
+                flex: 3,
+                child: Container(
+                  height: 100,
+                  color: Colors.blueGrey.shade200,
+                ),
+              ),
+            ),
+            Container(
+              height: 100,
+              color: Colors.lightBlue,
+            )
+          ],
+        ));
   }
 }
