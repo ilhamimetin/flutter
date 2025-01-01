@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:listeler/screens/home_screen.dart';
 import 'package:listeler/services/database_service.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   // Flutter'ı hazırla
@@ -10,7 +11,14 @@ void main() async {
   await DatabaseService.initialize();
 
   // Widgetları Çiz
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => DatabaseService()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
