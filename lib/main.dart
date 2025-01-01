@@ -1,25 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:listeler/screens/home_screen.dart';
 import 'package:listeler/services/database_service.dart';
-import 'package:provider/provider.dart';
 
 void main() async {
-  // Veritabanı işleminden dolayı kullanılan async yüzünden alttaki kod satırı uygulamanın ön hazırlık yapması için eklenmesi gerekmektedir.
+  // Flutter'ı hazırla
   WidgetsFlutterBinding.ensureInitialized();
-  // Database işlemlerini öncelikli olarak gerçekleştir. Database olduğundan dolayı bu fonksiyonumuzu yani main() fonksiyonumuzu async yapıyoruz.
+
+  // Veritabanını başlat
   await DatabaseService.initialize();
 
   // Widgetları Çiz
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => DatabaseService(),
-        ),
-      ],
-      child: const MyApp(),
-    ),
-  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

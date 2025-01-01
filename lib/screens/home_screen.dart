@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:listeler/models/todo_model.dart';
 import 'package:listeler/services/database_service.dart';
-import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -10,20 +9,29 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-
-
 class _HomeScreenState extends State<HomeScreen> {
-//   final _databaseService = DatabaseService(); // Artık buna ihtiyaç yok. Çünkü aşağıdaki "final _databaseService =context.watch<DatabaseService>();" kod satırı ile bunu değişiklikleri anınnda izleyerek değişkene atayıp o değişken üzerinden işlemlerimizi gerçekleştirdik.
+  final _databaseService = DatabaseService();
   final _textFieldController = TextEditingController();
 
-    void _fetchTodos() {
-    context.read<DatabaseService>().fetchTodos();
+  void _getTodoList() async {
+    await _databaseService.fetchTodos();
+    setState(() {});
   }
-  
+
+  void _addTodo() async {
+    await _databaseService.addTodo(_textFieldController.text);
+    _textFieldController.clear();
+    setState(() {});
+  }
+
+  void _updateTodo(Todo todo) async {
+    await _databaseService.updateTodo(todo);
+    setState(() {});
+  }
 
   @override
   void initState() {
-    _fetchTodos();
+    _getTodoList();
     super.initState();
   }
 
@@ -38,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Center(
         child: Column(
           children: [
-            _addTodoWidget(context),
+            _addTodoWidget(),
             _todoListWidget(),
           ],
         ),
@@ -47,10 +55,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Expanded _todoListWidget() {
-    final _databaseService =context.watch<DatabaseService>();
     return Expanded(
-      child: Consumer<DatabaseService>(builder: (context, databaseService, child) => ListView.separated(
-        itemCount: databaseService.currentTodos.length,
+      child: ListView.separated(
+        itemCount: _databaseService.currentTodos.length,
         itemBuilder: (context, index) {
           final Todo todo = _databaseService.currentTodos[index];
           return ListTile(
@@ -68,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
               value: todo.isDone,
               onChanged: (isDone) {
                 todo.isDone = isDone!;
-                databaseService.updateTodo(todo);
+                _updateTodo(todo);
               },
             ),
           );
@@ -77,20 +84,18 @@ class _HomeScreenState extends State<HomeScreen> {
           height: 0,
           color: Colors.blueGrey.shade100,
         ),
-      ),)
+      ),
     );
   }
 
-  Container _addTodoWidget(BuildContext context) {
+  Container _addTodoWidget() {
     return Container(
       margin: const EdgeInsets.all(20),
       child: TextField(
         controller: _textFieldController,
         decoration: InputDecoration(
           suffixIcon:
-              IconButton(onPressed: (){
-                context.read<DatabaseService>().addTodo(_textFieldController.text);
-              }, icon: const Icon(Icons.add)),
+              IconButton(onPressed: _addTodo, icon: const Icon(Icons.add)),
           border: const OutlineInputBorder(),
           isDense: true,
           hintText: "Birşeyler yazın.",
